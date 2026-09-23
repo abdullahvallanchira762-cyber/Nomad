@@ -1,0 +1,180 @@
+.category-card {
+  position: relative;
+
+  height: 590px;
+
+  overflow: hidden;
+
+  background: var(--color-surface);
+}
+
+.category-card-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.category-card:hover .category-card-image {
+  transform: scale(1.04);
+}
+
+/* Dark overlay */
+
+.category-card-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    to top,
+    rgba(10, 11, 12, 0.95) 0%,
+    rgba(10, 11, 12, 0.65) 45%,
+    rgba(10, 11, 12, 0.2) 100%
+  );
+}
+
+/* Top information */
+
+.category-card-top {
+  position: absolute;
+
+  top: 2rem;
+  left: 2rem;
+  right: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category-division {
+  color: var(--color-accent);
+
+  font-family: var(--font-heading);
+
+  font-size: 12px;
+  line-height: 16px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+
+/* Bottom content */
+
+.category-card-content {
+  position: absolute;
+
+  left: 2rem;
+  right: 2rem;
+  bottom: 2rem;
+}
+
+.category-card-content h3 {
+  margin: 0 0 0.5rem;
+
+  color: #ffffff;
+
+  font-family: var(--font-heading);
+
+  font-size: 28px;
+  line-height: 36px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+.category-card-content p {
+  max-width: 480px;
+
+  margin: 0 0 1rem;
+
+  color: #d0d1cc;
+
+  font-family: var(--font-body);
+
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.category-action {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  font-family: var(--font-heading);
+
+  font-size: 11px;
+  line-height: 16px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.category-action span {
+  font-size: 20px;
+
+  transition: transform 0.2s ease;
+}
+
+.category-card:hover .category-action span {
+  transform: translateX(4px);
+}
+
+/* Tablet */
+
+@media (max-width: 1023px) {
+  .category-card {
+    height: 500px;
+  }
+
+  .category-card-top {
+    left: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .category-card-content {
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .category-card {
+    height: 450px;
+  }
+
+  .category-card-content h3 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}

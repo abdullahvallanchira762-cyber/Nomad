@@ -1,0 +1,219 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Nomad Traverse Helmet",
+      "category": "Helmets",
+      "price": 4499,
+      "duration": "7 Days",
+      "difficulty": "Challenging",
+      "stock": 8,
+      "featured": true,
+      "rating": 4.9,
+      "image": "/images/products/helmet.png",
+      "description": "Modular dual-visor adventure helmet engineered for arctic transitions and sub-zero passes."
+    },
+    {
+      "id": "2",
+      "name": "Nomad All-Weather Jacket",
+      "category": "Riding Gear",
+      "price": 6199,
+      "duration": "10 Days",
+      "difficulty": "Expert",
+      "stock": 5,
+      "featured": true,
+      "rating": 4.8,
+      "image": "/images/products/jackets.png",
+      "description": "Mil-spec ballistic nylon jacket with integrated CE Level 2 armor and windproof membrane."
+    },
+    {
+      "id": "3",
+      "name": "Alpine 3-Season Tent",
+      "category": "Camping",
+      "price": 3799,
+      "duration": "12 Days",
+      "difficulty": "Moderate",
+      "stock": 12,
+      "featured": true,
+      "rating": 4.7,
+      "image": "/images/products/tent.png",
+      "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps."
+    },
+    {
+      "id": "4",
+      "name": "Nomad Enduro Gloves",
+      "category": "Riding Gear",
+      "price": 1399,
+      "duration": "6 Days",
+      "difficulty": "Moderate",
+      "stock": 15,
+      "featured": true,
+      "rating": 4.6,
+      "image": "/images/products/gloves.png",
+      "description": "Carbon knuckle shielding with hydrophobic goat-leather and touchscreen index tips."
+    },
+    {
+      "id": "5",
+      "name": "Nomad All-Terrain Boots",
+      "category": "Riding Gear",
+      "price": 2999,
+      "duration": "15 Days",
+      "difficulty": "Extreme",
+      "stock": 4,
+      "featured": true,
+      "rating": 4.9,
+      "image": "/images/products/shoes.png",
+      "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings."
+    },
+    {
+      "id": "6",
+      "name": "Nomad Adventure Pants",
+      "category": "Riding Gear",
+      "price": 3199,
+      "duration": "5 Days",
+      "difficulty": "Challenging",
+      "stock": 6,
+      "featured": true,
+      "rating": 4.5,
+      "image": "/images/products/pants.png",
+      "description": "Abrasion-resistant trousers with dual ventilation ports and CE Level 2 knee armor."
+    },
+    {
+      "id": "7",
+      "name": "Ant Helmet special edition",
+      "category": "Helmets",
+      "price": 2999,
+      "duration": "15 Days",
+      "difficulty": "Extreme",
+      "stock": 4,
+      "featured": true,
+      "rating": 4.9,
+      "image": "/images/products/helmet-two.png",
+      "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings."
+    },
+    {
+      "id": "8",
+      "name": "Travel Backpack",
+      "category": "Camping",
+      "price": 3799,
+      "duration": "12 Days",
+      "difficulty": "Moderate",
+      "stock": 12,
+      "featured": true,
+      "rating": 4.7,
+      "image": "/images/products/travel-backpack.png",
+      "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps."
+    },
+    {
+      "id": "9",
+      "name": "Hydration Packs",
+      "category": "Camping",
+      "price": 999,
+      "duration": "14 Days",
+      "difficulty": "Extreme",
+      "stock": 8,
+      "featured": true,
+      "rating": 4.9,
+      "image": "/images/products/hydration-pack.png",
+      "description": "These backpacks hold a water reservoir and feature a drinking tube with a bite valve that can be clipped to your shoulder strap for easy access."
+    },
+    {
+      "id": "10",
+      "name": "Infinty Helmet special edition",
+      "category": "Helmets",
+      "price": 2899,
+      "duration": "15 Days",
+      "difficulty": "Extreme",
+      "stock": 4,
+      "featured": true,
+      "rating": 4.9,
+      "image": "/images/products/helmet-three.png",
+      "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings."
+    }
+  ],
+  "users": [
+    {
+      "name": "Abdullah",
+      "email": "abdullahvallanchira762@gmail.com",
+      "password": "abvlogger",
+      "id": "u6fq8Ysf670"
+    },
+    {
+      "name": "mishal shanu",
+      "email": "mishal123@gamil.com",
+      "password": "12345678",
+      "id": "R0m_u_EC_Ig"
+    },
+    {
+      "name": "Majid",
+      "email": "MajidRamees@gmail.com",
+      "password": "Ramees",
+      "id": "ytphOxM84F8"
+    }
+  ],
+  "orders": [
+    {
+      "userId": "u6fq8Ysf670",
+      "customer": {
+        "name": "Abdullah",
+        "email": "abdullahvallanchira762@gmail.com",
+        "phone": "8848325562"
+      },
+      "shippingAddress": {
+        "address": "Vallanchira House Karuvambram (PO) manjeri, mangalasseri, malappuram, Kerala-676123",
+        "city": "manjeri",
+        "state": "kerala ",
+        "pincode": "676123"
+      },
+      "items": [
+        {
+          "id": "7",
+          "name": "Ant Helmet special edition",
+          "category": "Helmets",
+          "price": 2999,
+          "duration": "15 Days",
+          "difficulty": "Extreme",
+          "stock": 4,
+          "featured": true,
+          "rating": 4.9,
+          "image": "/images/products/helmet-two.png",
+          "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings.",
+          "quantity": 1
+        },
+        {
+          "id": "8",
+          "name": "Travel Backpack",
+          "category": "Camping",
+          "price": 3799,
+          "duration": "12 Days",
+          "difficulty": "Moderate",
+          "stock": 12,
+          "featured": true,
+          "rating": 4.7,
+          "image": "/images/products/travel-backpack.png",
+          "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps.",
+          "quantity": 1
+        },
+        {
+          "id": "3",
+          "name": "Alpine 3-Season Tent",
+          "category": "Camping",
+          "price": 3799,
+          "duration": "12 Days",
+          "difficulty": "Moderate",
+          "stock": 12,
+          "featured": true,
+          "rating": 4.7,
+          "image": "/images/products/tent.png",
+          "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps.",
+          "quantity": 1
+        }
+      ],
+      "total": 10597,
+      "status": "Placed",
+      "createdAt": "2026-09-23T04:48:28.393Z",
+      "id": "zDGwzKwHw40"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -1,0 +1,180 @@
+.contact-section {
+  background-color: #0d0d0d;
+  color: #ffffff;
+  padding: 80px 40px;
+  font-family: inherit;
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.contact-subtag {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: #cda372;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.contact-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.contact-description {
+  font-size: 0.95rem;
+  color: #a1a1aa;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.info-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-card {
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.info-icon {
+  font-size: 1.25rem;
+}
+
+.info-label {
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: #71717a;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-size: 0.9rem;
+  color: #f4f4f5;
+  font-weight: 600;
+  margin: 0;
+}
+
+.contact-form-wrapper {
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  padding: 36px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: #a1a1aa;
+  font-weight: 700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background-color: #0f0f11;
+  border: 1px solid #27272a;
+  color: #ffffff;
+  padding: 12px 14px;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #cda372;
+}
+
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23A1A1AA%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 10px;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.form-checkbox input {
+  accent-color: #cda372;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.form-checkbox label {
+  font-size: 0.75rem;
+  color: #a1a1aa;
+  cursor: pointer;
+}
+
+.submit-btn {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 14px 28px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: #cda372;
+}
+
+@media (max-width: 900px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

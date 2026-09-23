@@ -1,0 +1,285 @@
+.philosophy {
+  width: 100%;
+  background: #121314;
+  color: #e3e2e3;
+  padding: 100px 0;
+}
+
+.philosophy-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+/* --------------------------------
+   SECTION MARKER
+-------------------------------- */
+
+.philosophy-marker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.philosophy-marker-main {
+  color: #e0c294;
+}
+
+.philosophy-line {
+  width: 64px;
+  height: 1px;
+  background: #343536;
+}
+
+.philosophy-marker-sub {
+  color: #8f918c;
+}
+
+/* --------------------------------
+   MAIN SECTION
+-------------------------------- */
+
+.philosophy-main {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  margin-bottom: 48px;
+}
+
+/* --------------------------------
+   LEFT INTRO
+-------------------------------- */
+
+.philosophy-intro h2 {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  color: #ffffff;
+}
+
+.philosophy-description {
+  margin-top: 24px;
+}
+
+.philosophy-description p {
+  margin: 0 0 16px;
+
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+
+  color: #c5c7c1;
+}
+
+/* --------------------------------
+   QUOTE
+-------------------------------- */
+
+.philosophy-quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: #1b1c1d;
+  padding: 24px;
+  min-height: 190px;
+}
+
+.quote-mark {
+  color: #e0c294;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.philosophy-quote blockquote {
+  margin: 12px 0 24px;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  color: #ffffff;
+}
+
+.quote-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: #8f918c;
+}
+
+.quote-footer span:last-child {
+  color: #e0c294;
+}
+
+/* --------------------------------
+   FEATURE CARDS
+-------------------------------- */
+
+.philosophy-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.philosophy-card {
+  background: #1f2021;
+  padding: 24px;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+
+  border: 1px solid transparent;
+}
+
+.philosophy-card:hover {
+  background: #292a2b;
+  border-color: rgba(245, 244, 240, 0.12);
+}
+
+.philosophy-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+
+  color: #8f918c;
+}
+
+.philosophy-card-top span:first-child {
+  color: #e0c294;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.philosophy-card-top .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.philosophy-card h3 {
+  margin: 0 0 12px;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  color: #ffffff;
+}
+
+.philosophy-card p {
+  margin: 0;
+
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+
+  color: #c5c7c1;
+}
+
+/* --------------------------------
+   TABLET
+-------------------------------- */
+
+@media (max-width: 1024px) {
+  .philosophy-container {
+    padding: 0 32px;
+  }
+
+  .philosophy-main {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .philosophy-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --------------------------------
+   MOBILE
+-------------------------------- */
+
+@media (max-width: 767px) {
+  .philosophy {
+    padding: 64px 0;
+  }
+
+  .philosophy-container {
+    padding: 0 20px;
+  }
+
+  .philosophy-marker {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .philosophy-line {
+    display: none;
+  }
+
+  .philosophy-main {
+    gap: 32px;
+  }
+
+  .philosophy-intro h2 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .philosophy-quote {
+    padding: 20px;
+  }
+
+  .philosophy-quote blockquote {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .quote-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .philosophy-features {
+    grid-template-columns: 1fr;
+  }
+
+  .philosophy-card {
+    padding: 20px;
+  }
+}
