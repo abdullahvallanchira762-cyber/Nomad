@@ -1,65 +1,97 @@
+/* =========================================================
+   HERO
+========================================================= */
+
 .hero {
   position: relative;
-
   width: 100%;
   min-height: 92vh;
-
   margin-top: -80px;
-
-  overflow: hidden;
-
-  background: var(--color-background);
-
   padding-top: 80px;
+  overflow: hidden;
+  background: var(--color-background);
 }
 
-/* Background */
+
+/* =========================================================
+   BACKGROUND VIDEO
+========================================================= */
 
 .hero-background {
   position: absolute;
-
   inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #121314;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 
   width: 100%;
   height: 100%;
 
-  background-image: url("/images/hero/hero-image.png");
-  background-size: cover;
-  background-position: center;
+  min-width: 100%;
+  min-height: 100%;
 
-  transform: scale(1.05);
+  transform: translate(-50%, -50%);
 
-  transition: transform 1s ease;
+  object-fit: cover;
+  object-position: center center;
+
+  display: block;
 }
+
+
+/* =========================================================
+   DARK BOTTOM OVERLAY
+========================================================= */
 
 .hero-overlay-bottom {
   position: absolute;
   inset: 0;
+  z-index: 2;
+
   background: linear-gradient(
     to top,
     #121314 0%,
     rgba(18, 19, 20, 0.45) 45%,
     rgba(18, 19, 20, 0.15) 100%
   );
+
+  pointer-events: none;
 }
 
-/* Left dark gradient */
+
+/* =========================================================
+   DARK LEFT OVERLAY
+========================================================= */
+
 .hero-overlay-left {
   position: absolute;
   inset: 0;
+  z-index: 3;
+
   background: linear-gradient(
     to right,
     rgba(18, 19, 20, 0.65) 0%,
     rgba(18, 19, 20, 0.25) 45%,
     transparent 100%
   );
+
+  pointer-events: none;
 }
 
-/* Main container */
+
+/* =========================================================
+   MAIN HERO CONTAINER
+========================================================= */
 
 .hero-container {
   position: relative;
-
   z-index: 10;
 
   width: 100%;
@@ -74,14 +106,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  box-sizing: border-box;
 }
 
-/* Telemetry */
+
+/* =========================================================
+   TELEMETRY
+========================================================= */
 
 .hero-telemetry {
   display: flex;
   align-items: center;
-
   gap: 1rem;
 
   margin-bottom: 2.5rem;
@@ -90,7 +126,6 @@
 .telemetry-box {
   display: inline-flex;
   align-items: center;
-
   gap: 0.25rem;
 
   padding: 4px 1rem;
@@ -98,17 +133,15 @@
   background: rgba(52, 53, 54, 0.6);
 
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
   color: var(--color-text);
 
   font-family: var(--font-heading);
-
   font-size: 10px;
-
   line-height: 14px;
 
   letter-spacing: 0.14em;
-
   text-transform: uppercase;
 }
 
@@ -125,17 +158,17 @@
   color: #8f918c;
 
   font-family: var(--font-heading);
-
   font-size: 10px;
-
   line-height: 14px;
 
   letter-spacing: 0.14em;
-
   text-transform: uppercase;
 }
 
-/* Main content */
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
 
 .hero-main {
   max-width: 672px;
@@ -144,7 +177,6 @@
 .hero-title-area {
   display: flex;
   flex-direction: column;
-
   gap: 0.25rem;
 }
 
@@ -154,15 +186,11 @@
   color: var(--color-accent);
 
   font-family: var(--font-heading);
-
   font-size: 12px;
-
   line-height: 16px;
-
   font-weight: 600;
 
   letter-spacing: 0.14em;
-
   text-transform: uppercase;
 }
 
@@ -174,7 +202,6 @@
   font-family: var(--font-heading);
 
   font-size: 56px;
-
   line-height: 64px;
 
   font-weight: 600;
@@ -194,16 +221,17 @@
   font-family: var(--font-body);
 
   font-size: 18px;
-
   line-height: 28px;
 }
 
-/* Button */
+
+/* =========================================================
+   BUTTON
+========================================================= */
 
 .hero-actions {
   display: flex;
   align-items: center;
-
   gap: 1rem;
 
   padding-top: 1rem;
@@ -219,13 +247,13 @@
   background: rgba(41, 42, 43, 0.7);
 
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   color: #ffffff;
 
   font-family: var(--font-heading);
 
   font-size: 12px;
-
   line-height: 16px;
 
   font-weight: 600;
@@ -234,22 +262,29 @@
 
   text-transform: uppercase;
 
-  transition: background 0.2s ease;
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .hero-button:hover {
   background: #343536;
+
+  transform: translateY(-2px);
 }
 
-/* Bottom information */
+
+/* =========================================================
+   BOTTOM INFORMATION
+========================================================= */
 
 .hero-footer {
   padding-top: 2.5rem;
 
   display: flex;
-
   align-items: flex-end;
-
   justify-content: space-between;
 
   gap: 1rem;
@@ -275,7 +310,6 @@
   font-family: var(--font-heading);
 
   font-size: 10px;
-
   line-height: 14px;
 
   letter-spacing: 0.14em;
@@ -291,7 +325,6 @@
   font-family: var(--font-heading);
 
   font-size: 12px;
-
   line-height: 16px;
 
   font-weight: 600;
@@ -308,12 +341,14 @@
   background: #343536;
 }
 
-/* Scroll indicator */
-/* 
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
 .scroll-indicator {
   display: flex;
   align-items: center;
-
   gap: 0.25rem;
 
   color: #c5c7c1;
@@ -321,19 +356,23 @@
   font-family: var(--font-heading);
 
   font-size: 10px;
-
   line-height: 14px;
 
   letter-spacing: 0.14em;
 
   text-transform: uppercase;
-} */
-/* 
+}
+
 .scroll-indicator .material-symbols-outlined {
   font-size: 18px;
 
   animation: bounce 1.5s infinite;
-} */
+}
+
+
+/* =========================================================
+   BOUNCE ANIMATION
+========================================================= */
 
 @keyframes bounce {
   0%,
@@ -346,35 +385,160 @@
   }
 }
 
-/* Tablet */
+
+/* =========================================================
+   LARGE TABLET / SMALL DESKTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+  .hero-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .hero-main {
+    max-width: 620px;
+  }
+
+  .hero-main h1 {
+    font-size: 52px;
+    line-height: 60px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 1023px) {
+  .hero {
+    min-height: 90vh;
+  }
+
   .hero-container {
+    min-height: 90vh;
+
+    padding-top: 150px;
     padding-left: 2rem;
     padding-right: 2rem;
+    padding-bottom: 60px;
+  }
+
+  .hero-main {
+    max-width: 600px;
   }
 
   .hero-main h1 {
     font-size: 48px;
     line-height: 56px;
   }
+
+  .hero-description {
+    max-width: 480px;
+
+    font-size: 17px;
+    line-height: 26px;
+  }
+
+  /*
+    Slightly stronger overlay on tablet
+    so the text remains readable.
+  */
+
+  .hero-overlay-left {
+    background: linear-gradient(
+      to right,
+      rgba(18, 19, 20, 0.7) 0%,
+      rgba(18, 19, 20, 0.3) 55%,
+      transparent 100%
+    );
+  }
 }
 
-/* Mobile */
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 600px) {
   .hero {
-    min-height: 100vh;
+    width: 100%;
+
+    min-height: 100svh;
+
+    margin-top: -70px;
+
+    padding-top: 70px;
   }
+
+  /*
+    Video fills the complete mobile Hero.
+    object-fit: cover prevents distortion.
+  */
+
+  .hero-background {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-video {
+    width: 100%;
+    height: 100%;
+
+    min-width: 100%;
+    min-height: 100%;
+
+    object-fit: cover;
+
+    /*
+      Change this to 50% 40% if the important
+      part of your video is higher in the frame.
+    */
+    object-position: center center;
+  }
+
+  /*
+    Stronger dark overlay on mobile
+    because the 16:9 video is cropped.
+  */
+
+  .hero-overlay-bottom {
+    background: linear-gradient(
+      to top,
+      #121314 0%,
+      rgba(18, 19, 20, 0.58) 48%,
+      rgba(18, 19, 20, 0.2) 100%
+    );
+  }
+
+  .hero-overlay-left {
+    background: linear-gradient(
+      to right,
+      rgba(18, 19, 20, 0.72) 0%,
+      rgba(18, 19, 20, 0.35) 65%,
+      transparent 100%
+    );
+  }
+
+  /* Main container */
 
   .hero-container {
-    min-height: 100vh;
+    width: 100%;
 
-    padding: 150px 1.25rem 40px;
+    min-height: 100svh;
+
+    padding: 140px 1.25rem 40px;
+
+    box-sizing: border-box;
   }
+
+  /* Telemetry */
 
   .hero-telemetry {
     align-items: flex-start;
+
+    margin-bottom: 2rem;
   }
 
   .telemetry-box {
@@ -385,19 +549,57 @@
     display: none;
   }
 
+  /* Main content */
+
+  .hero-main {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-label {
+    font-size: 10px;
+    line-height: 14px;
+
+    letter-spacing: 0.12em;
+  }
+
   .hero-main h1 {
     font-size: 36px;
     line-height: 44px;
+
+    letter-spacing: 0.035em;
   }
 
   .hero-description {
+    max-width: 100%;
+
+    margin-top: 1.25rem;
+
     font-size: 15px;
     line-height: 24px;
   }
 
+  /* Button */
+
+  .hero-actions {
+    padding-top: 1rem;
+  }
+
+  .hero-button {
+    padding: 0.9rem 1.75rem;
+
+    font-size: 11px;
+    line-height: 15px;
+  }
+
+  /* Footer */
+
   .hero-footer {
     flex-direction: column;
+
     align-items: flex-start;
+
+    padding-top: 2rem;
   }
 
   .hero-specifications {
@@ -410,5 +612,81 @@
 
   .scroll-indicator {
     margin-top: 1rem;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .hero-container {
+    padding-top: 125px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero-main h1 {
+    font-size: 32px;
+    line-height: 39px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .hero-button {
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+
+/* =========================================================
+   LANDSCAPE MOBILE
+========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero-container {
+    min-height: 100svh;
+
+    padding-top: 100px;
+    padding-bottom: 30px;
+  }
+
+  .hero-main h1 {
+    font-size: 34px;
+    line-height: 40px;
+  }
+
+  .hero-description {
+    margin-top: 0.75rem;
+
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .hero-actions {
+    padding-top: 0.5rem;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-button {
+    transition: none;
+  }
+
+  .scroll-indicator .material-symbols-outlined {
+    animation: none;
   }
 }

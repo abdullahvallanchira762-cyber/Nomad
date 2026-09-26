@@ -1,12 +1,60 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Hero.css";
 
 function Hero() {
+  const videoRef = useRef(null);
+  const [currentVideo, setCurrentVideo] = useState(1);
+
+  const videos = [
+    "/videos/hero-video-1.mp4",
+    "/videos/hero-video-2.mp4",
+  ];
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) return;
+
+    video.load();
+
+    const playVideo = async () => {
+      try {
+        await video.play();
+      } catch (error) {
+        console.log("Video autoplay prevented:", error);
+      }
+    };
+
+    playVideo();
+  }, [currentVideo]);
+
+  const handleVideoEnd = () => {
+    setCurrentVideo((prev) => (prev === videos.length ? 1 : prev + 1));
+  };
+
   return (
     <section className="hero">
 
-      {/* Background Image */}
-      <div className="hero-background"></div>
+      {/* Background Video */}
+      <div className="hero-background">
+
+        <video
+          ref={videoRef}
+          key={videos[currentVideo - 1]}
+          className="hero-video"
+          autoPlay
+          muted
+          playsInline
+          onEnded={handleVideoEnd}
+        >
+          <source
+            src={videos[currentVideo - 1]}
+            type="video/mp4"
+          />
+        </video>
+
+      </div>
 
       {/* Dark overlays */}
       <div className="hero-overlay-bottom"></div>
@@ -18,7 +66,8 @@ function Hero() {
         {/* Location / Telemetry */}
         <div className="hero-telemetry">
 
-          {/* <div className="telemetry-box">
+          {/* 
+          <div className="telemetry-box">
             <span className="telemetry-dot"></span>
 
             <span>
@@ -28,9 +77,10 @@ function Hero() {
 
           <span className="field-reference">
             // FIELD TEST REF: NM-26-09
-          </span>*/}
+          </span>
+          */}
 
-        </div> 
+        </div>
 
         {/* Main Content */}
         <div className="hero-main">
@@ -56,8 +106,8 @@ function Hero() {
 
           <div className="hero-actions">
             <Link to="/story" className="hero-button">
-                Our Story
-              </Link>
+              Our Story
+            </Link>
           </div>
 
         </div>
@@ -67,7 +117,8 @@ function Hero() {
 
           <div className="hero-specifications">
 
-            {/* <div className="hero-spec">
+            {/* 
+            <div className="hero-spec">
               <span className="spec-label">
                 Durability Grade
               </span>
@@ -87,19 +138,10 @@ function Hero() {
               <span className="spec-value">
                 All-Altitude Alpine
               </span>
-            </div> */}
+            </div>
+            */}
 
           </div>
-
-          {/* <div className="scroll-indicator">
-            <span>
-              {/* Scroll to Traverse */}
-            {/* </span>
-
-            <span className="material-symbols-outlined">
-              arrow_downward
-            </span>
-          </div> */} 
 
         </div>
 

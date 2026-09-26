@@ -122,23 +122,28 @@ export default function Products() {
           filters.search.toLowerCase()
         );
     })
+    
     .sort((a, b) => {
-      if (filters.sort === "low-high") {
-        return (
-          Number(a.price) -
-          Number(b.price)
-        );
-      }
+  if (filters.sort === "low-high") {
+    return Number(a.price) - Number(b.price);
+  }
 
-      if (filters.sort === "high-low") {
-        return (
-          Number(b.price) -
-          Number(a.price)
-        );
-      }
+  if (filters.sort === "high-low") {
+    return Number(b.price) - Number(a.price);
+  }
 
-      return 0;
-    });
+  if (filters.sort === "high-rating") {
+    return Number(b.rating) - Number(a.rating);
+  }
+
+  if (filters.sort === "low-rating") {
+    return Number(a.rating) - Number(b.rating);
+  }
+
+  return 0;
+});
+
+    
 
   // =========================================================
   // PAGINATION
@@ -311,6 +316,15 @@ export default function Products() {
           <option value="high-low">
             Price: High to Low
           </option>
+
+           <option value="high-rating">
+            Rating: High to Low
+          </option>
+
+          <option value="low-rating">
+            Rating: Low to High
+          </option>
+
         </select>
 
       </div>

@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import "./JourneyBanner.css";
+
 
 const JourneyBanner = () => {
   return (
@@ -13,7 +15,9 @@ const JourneyBanner = () => {
         <p className="journey-description">
           Gear up. Ride further. Explore beyond the map with confidence forged in high altitudes.
         </p>
-        <button className="journey-btn">EXPLORE NOMAD</button>
+        <Link to="/story" className="hero-button">
+          EXPLORE NOMAD
+        </Link>
       </div>
     </section>
   );

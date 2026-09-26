@@ -178,3 +178,8 @@
     grid-template-columns: 1fr;
   }
 }
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

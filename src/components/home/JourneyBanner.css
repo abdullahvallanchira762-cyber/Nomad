@@ -75,3 +75,10 @@
   background-color: #d8b48b;
   transform: translateY(-2px);
 }
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}

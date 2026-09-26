@@ -235,11 +235,10 @@ function Navbar() {
   ========================================================= */
 
   useEffect(() => {
-    setMobileMenuOpen(false);
-    setMobileSearchOpen(false);
-    setAccountOpen(false);
-    setSearchOpen(false);
-  }, [location.pathname]);
+  setMobileMenuOpen(false);
+  setMobileSearchOpen(false);
+  setAccountOpen(false);
+}, [location.pathname]);
 
   /* =========================================================
      ESCAPE
