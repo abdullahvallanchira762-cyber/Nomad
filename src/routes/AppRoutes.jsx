@@ -1,13 +1,25 @@
-
 import { Routes, Route, useLocation } from "react-router-dom";
 
+// Admin
+import AdminLayout from "../layout/AdminLayout";
+import AdminProtectedRoute from "./AdminProtectedRoute";
+
+import AdminLogin from "../pages/Admin/AdminLogin";
+import AdminDashboard from "../pages/Admin/AdminDashboard";
+
+import AdminProducts from "../pages/Admin/AdminProducts";
+
+import AdminUsers from "../pages/Admin/AdminUsers";
+
+import AdminOrders from "../pages/Admin/AdminOrders";
+
+// User
 import UserLayout from "../layout/UserLayout";
 import ProtectedRoute from "./ProtectedRoute";
 
 import Home from "../pages/Home";
 import Products from "../pages/Products/Products";
 import Story from "../pages/story/Story";
-
 import ProductDetails from "../pages/Products/ProductDetails";
 
 import Login from "../pages/Auth/Login";
@@ -27,11 +39,17 @@ function AppRoutes() {
    * When Login/Register is opened from another page,
    * keep the previous page visible underneath.
    */
-  const backgroundLocation = location.state?.backgroundLocation;
+  const backgroundLocation =
+    location.state?.backgroundLocation;
 
   return (
     <>
       <Routes location={backgroundLocation || location}>
+
+        {/* =====================================================
+            USER APPLICATION
+        ===================================================== */}
+
         <Route element={<UserLayout />}>
 
           {/* Public routes */}
@@ -51,7 +69,7 @@ function AppRoutes() {
             element={<ProductDetails />}
           />
 
-          {/* Login */}
+          {/* User Login */}
 
           <Route
             path="/login"
@@ -62,7 +80,7 @@ function AppRoutes() {
             }
           />
 
-          {/* Register */}
+          {/* User Register */}
 
           <Route
             path="/register"
@@ -73,7 +91,7 @@ function AppRoutes() {
             }
           />
 
-          {/* Protected routes */}
+          {/* Protected user routes */}
 
           <Route element={<ProtectedRoute />}>
 
@@ -97,16 +115,68 @@ function AppRoutes() {
               element={<Orders />}
             />
 
-            <Route path="/story" element={<Story />} />
+            <Route
+              path="/story"
+              element={<Story />}
+            />
 
           </Route>
 
         </Route>
+
+
+        {/* =====================================================
+            ADMIN LOGIN
+        ===================================================== */}
+
+        <Route
+          path="/admin/login"
+          element={<AdminLogin />}
+        />
+
+
+        {/* =====================================================
+            ADMIN APPLICATION
+        ===================================================== */}
+
+        <Route element={<AdminProtectedRoute />}>
+
+          <Route element={<AdminLayout />}>
+
+            <Route
+              path="/admin"
+              element={<AdminDashboard />}
+            />
+
+            <Route
+              path="/admin/products"
+              element={<AdminProducts />}
+            />
+
+             <Route
+                path="/admin/users"
+                element={<AdminUsers />}
+            />
+
+            <Route 
+              path="/admin/orders" 
+              element={<AdminOrders />} 
+            />
+
+          </Route>
+
+        </Route>
+
       </Routes>
 
-      {/* Render Login/Register over the existing page */}
+
+      {/* =======================================================
+          LOGIN / REGISTER MODAL ROUTES
+      ======================================================= */}
+
       {backgroundLocation && (
         <Routes>
+
           <Route
             path="/login"
             element={
@@ -124,8 +194,10 @@ function AppRoutes() {
               </PublicRoute>
             }
           />
+
         </Routes>
       )}
+
     </>
   );
 }

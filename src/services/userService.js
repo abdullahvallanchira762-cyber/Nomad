@@ -11,7 +11,14 @@ export const getUserById = async (id) => {
 };
 
 export const registerUser = async (userData) => {
-  const response = await api.post("/users", userData);
+  const newUser = {
+    ...userData,
+    role: "user",
+    status: "active",
+  };
+
+  const response = await api.post("/users", newUser);
+
   return response.data;
 };
 

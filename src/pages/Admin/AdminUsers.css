@@ -1,0 +1,509 @@
+/* =========================================================
+   NOMAD ADMIN USERS
+   ========================================================= */
+
+.admin-users-page {
+  width: 100%;
+}
+
+/* =========================================================
+   PAGE HEADING
+   ========================================================= */
+
+.admin-page-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 38px;
+}
+
+.admin-section-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.admin-page-heading h2 {
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.admin-page-heading p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   USER COUNT
+   ========================================================= */
+
+.admin-user-count {
+  min-width: 135px;
+  padding: 18px 22px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  border: 1px solid rgba(242, 239, 231, 0.1);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.admin-user-count span {
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.admin-user-count small {
+  color: var(--color-text-muted);
+  font-family: var(--font-heading);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-align: center;
+}
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.admin-users-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.admin-search-box {
+  width: 100%;
+  max-width: 380px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  border: 1px solid rgba(242, 239, 231, 0.12);
+  background: var(--color-surface);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.admin-search-box:focus-within {
+  border-color: rgba(196, 168, 124, 0.55);
+  background: var(--color-surface-light);
+}
+
+.admin-search-box .material-symbols-outlined {
+  color: var(--color-text-muted);
+  font-size: 19px;
+}
+
+.admin-search-box input {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 12px;
+}
+
+.admin-search-box input::placeholder {
+  color: #686963;
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.admin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid rgba(242, 239, 231, 0.09);
+  background: var(--color-surface);
+}
+
+.admin-users-table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.admin-users-table th {
+  height: 48px;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(242, 239, 231, 0.1);
+  color: #777872;
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.admin-users-table td {
+  height: 72px;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(242, 239, 231, 0.065);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.admin-users-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.admin-users-table tbody tr:hover {
+  background: rgba(242, 239, 231, 0.025);
+}
+
+.admin-users-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================================================
+   USER CELL
+   ========================================================= */
+
+.admin-user-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-user-initial {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(196, 168, 124, 0.35);
+  background: rgba(196, 168, 124, 0.06);
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-user-cell > span:last-child {
+  overflow: hidden;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   EMAIL
+   ========================================================= */
+
+.admin-user-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   ROLE
+   ========================================================= */
+
+.admin-role {
+  display: inline-block;
+  padding: 6px 9px;
+  border: 1px solid rgba(242, 239, 231, 0.1);
+  color: var(--color-text-muted);
+  font-family: var(--font-heading);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.admin-users-table tr:has(.admin-role) .admin-role {
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.admin-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.admin-status-active {
+  color: #8eaa82;
+}
+
+.admin-status-blocked {
+  color: #b8786d;
+}
+
+/* =========================================================
+   ACTION BUTTON
+   ========================================================= */
+
+.admin-user-action {
+  height: 34px;
+  min-width: 92px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: var(--font-heading);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.admin-user-action .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.admin-user-action-block {
+  border-color: rgba(184, 120, 109, 0.35);
+  color: #b8786d;
+}
+
+.admin-user-action-block:hover {
+  border-color: rgba(184, 120, 109, 0.65);
+  background: rgba(184, 120, 109, 0.08);
+}
+
+.admin-user-action-unblock {
+  border-color: rgba(142, 170, 130, 0.35);
+  color: #8eaa82;
+}
+
+.admin-user-action-unblock:hover {
+  border-color: rgba(142, 170, 130, 0.65);
+  background: rgba(142, 170, 130, 0.08);
+}
+
+.admin-user-action:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   ADMIN PROTECTED LABEL
+   ========================================================= */
+
+.admin-protected-label {
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+.admin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.admin-pagination span {
+  color: var(--color-text-muted);
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.admin-pagination button {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(242, 239, 231, 0.12);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.admin-pagination button:hover:not(:disabled) {
+  border-color: rgba(196, 168, 124, 0.5);
+  background: var(--color-surface-light);
+  color: var(--color-accent);
+}
+
+.admin-pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.admin-pagination .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* =========================================================
+   LOADING / ERROR / EMPTY STATES
+   ========================================================= */
+
+.admin-page-state {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid rgba(242, 239, 231, 0.08);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.admin-page-state .material-symbols-outlined {
+  font-size: 30px;
+  color: var(--color-accent);
+}
+
+.admin-page-state p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+
+.admin-page-error .material-symbols-outlined {
+  color: #b8786d;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .admin-page-heading {
+    align-items: flex-start;
+  }
+
+  .admin-user-count {
+    min-width: 115px;
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-page-heading {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .admin-page-heading h2 {
+    font-size: 28px;
+  }
+
+  .admin-user-count {
+    align-items: center;
+  }
+
+  .admin-users-toolbar {
+    margin-bottom: 16px;
+  }
+
+  .admin-search-box {
+    max-width: none;
+  }
+
+  .admin-table-wrapper {
+    border-left: none;
+    border-right: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .admin-page-heading h2 {
+    font-size: 25px;
+  }
+
+  .admin-page-heading p {
+    font-size: 12px;
+  }
+
+  .admin-user-count {
+    width: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .admin-user-count span {
+    font-size: 22px;
+  }
+
+  .admin-user-count small {
+    text-align: center;
+  }
+
+  .admin-pagination {
+    justify-content: center;
+  }
+}

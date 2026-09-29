@@ -47,14 +47,23 @@ function Login() {
     try {
       setLoading(true);
 
-      const user = await loginUser(
-        formData.email,
-        formData.password
-      );
+ const user = await loginUser(
+  formData.email,
+  formData.password
+);
 
-      dispatch(loginSuccess(user));
+if (user.status === "blocked") {
+  setError(
+    "Your account has been blocked. Please contact Nomad support."
+  );
+  return;
+}
 
-      navigate(from, { replace: true });
+dispatch(loginSuccess(user));
+
+navigate(from, { replace: true });
+
+
     } catch (err) {
       setError(err.message || "Invalid email or password.");
     } finally {

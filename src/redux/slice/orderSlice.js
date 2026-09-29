@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createOrder,
   getOrdersByUser,
+  getAllOrders,
   updateOrder,
 } from "../../services/orderService";
 
@@ -31,6 +32,22 @@ export const fetchUserOrders = createAsyncThunk(
   async (userId, { rejectWithValue }) => {
     try {
       const orders = await getOrdersByUser(userId);
+      return orders;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// =========================================================
+// FETCH ALL ORDERS - ADMIN
+// =========================================================
+
+export const fetchAllOrders = createAsyncThunk(
+  "orders/fetchAllOrders",
+  async (_, { rejectWithValue }) => {
+    try {
+      const orders = await getAllOrders();
       return orders;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -103,7 +120,7 @@ const orderSlice = createSlice({
       })
 
       // ===================================================
-      // FETCH ORDERS
+      // FETCH USER ORDERS
       // ===================================================
 
       .addCase(fetchUserOrders.pending, (state) => {
@@ -117,6 +134,26 @@ const orderSlice = createSlice({
       })
 
       .addCase(fetchUserOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // ===================================================
+      // FETCH ALL ORDERS - ADMIN
+      // ===================================================
+
+      .addCase(fetchAllOrders.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+
+      .addCase(fetchAllOrders.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.items = action.payload;
+      })
+
+      .addCase(fetchAllOrders.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

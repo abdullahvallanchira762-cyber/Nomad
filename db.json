@@ -11,7 +11,11 @@
       "featured": true,
       "rating": 4.9,
       "image": "/images/products/helmet.png",
-      "description": "Modular dual-visor adventure helmet engineered for arctic transitions and sub-zero passes."
+      "description": "Modular dual-visor adventure helmet engineered for arctic transitions and sub-zero passes.",
+      "images": [
+        "/images/products/helmet.png",
+        "/images/products/helmet-back.png"
+      ]
     },
     {
       "id": "2",
@@ -24,7 +28,11 @@
       "featured": true,
       "rating": 4.8,
       "image": "/images/products/jackets.png",
-      "description": "Mil-spec ballistic nylon jacket with integrated CE Level 2 armor and windproof membrane."
+      "description": "Mil-spec ballistic nylon jacket with integrated CE Level 2 armor and windproof membrane.",
+      "images": [
+        "/images/products/jackets.png",
+        "/images/products/jacket-back.png"
+      ]
     },
     {
       "id": "3",
@@ -50,7 +58,11 @@
       "featured": true,
       "rating": 4.6,
       "image": "/images/products/gloves.png",
-      "description": "Carbon knuckle shielding with hydrophobic goat-leather and touchscreen index tips."
+      "description": "Carbon knuckle shielding with hydrophobic goat-leather and touchscreen index tips.",
+      "images": [
+        "/images/products/gloves.png",
+        "/images/products/gloves-back.png"
+      ]
     },
     {
       "id": "5",
@@ -63,7 +75,11 @@
       "featured": true,
       "rating": 4.9,
       "image": "/images/products/shoes.png",
-      "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings."
+      "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings.",
+      "images": [
+        "/images/products/shoes.png",
+        "/images/products/shoes-back.png"
+      ]
     },
     {
       "id": "6",
@@ -76,7 +92,11 @@
       "featured": true,
       "rating": 4.5,
       "image": "/images/products/pants.png",
-      "description": "Abrasion-resistant trousers with dual ventilation ports and CE Level 2 knee armor."
+      "description": "Abrasion-resistant trousers with dual ventilation ports and CE Level 2 knee armor.",
+      "images": [
+        "/images/products/pants.png",
+        "/images/products/pants-back.png"
+      ]
     },
     {
       "id": "7",
@@ -133,141 +153,22 @@
   ],
   "users": [
     {
+      "name": "Nomad Admin",
+      "email": "admin@nomad.com",
+      "password": "admin123",
+      "role": "admin",
+      "status": "active",
+      "id": "admin001"
+    },
+    {
       "name": "Abdullah",
       "email": "abdullahvallanchira762@gmail.com",
       "password": "abvlogger",
-      "id": "u6fq8Ysf670"
-    },
-    {
-      "name": "mishal shanu",
-      "email": "mishal123@gamil.com",
-      "password": "12345678",
-      "id": "R0m_u_EC_Ig"
-    },
-    {
-      "name": "Majid",
-      "email": "MajidRamees@gmail.com",
-      "password": "Ramees",
-      "id": "ytphOxM84F8"
-    },
-    {
-      "name": "shan",
-      "email": "shan@123gmail.com",
-      "password": "12345678",
-      "id": "T8cJqxJTyQs"
+      "role": "user",
+      "status": "active",
+      "id": "KiQ8nraQObI"
     }
   ],
-  "orders": [
-    {
-      "userId": "u6fq8Ysf670",
-      "customer": {
-        "name": "Abdullah",
-        "email": "abdullahvallanchira762@gmail.com",
-        "phone": "8848325562"
-      },
-      "shippingAddress": {
-        "address": "Vallanchira House Karuvambram (PO) manjeri, mangalasseri, malappuram, Kerala-676123",
-        "city": "manjeri",
-        "state": "kerala ",
-        "pincode": "676123"
-      },
-      "items": [
-        {
-          "id": "7",
-          "name": "Ant Helmet special edition",
-          "category": "Helmets",
-          "price": 2999,
-          "duration": "15 Days",
-          "difficulty": "Extreme",
-          "stock": 4,
-          "featured": true,
-          "rating": 4.9,
-          "image": "/images/products/helmet-two.png",
-          "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings.",
-          "quantity": 1
-        },
-        {
-          "id": "8",
-          "name": "Travel Backpack",
-          "category": "Camping",
-          "price": 3799,
-          "duration": "12 Days",
-          "difficulty": "Moderate",
-          "stock": 12,
-          "featured": true,
-          "rating": 4.7,
-          "image": "/images/products/travel-backpack.png",
-          "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps.",
-          "quantity": 1
-        },
-        {
-          "id": "3",
-          "name": "Alpine 3-Season Tent",
-          "category": "Camping",
-          "price": 3799,
-          "duration": "12 Days",
-          "difficulty": "Moderate",
-          "stock": 12,
-          "featured": true,
-          "rating": 4.7,
-          "image": "/images/products/tent.png",
-          "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps.",
-          "quantity": 1
-        }
-      ],
-      "total": 10597,
-      "status": "Placed",
-      "createdAt": "2026-09-23T04:48:28.393Z",
-      "id": "zDGwzKwHw40"
-    },
-    {
-      "userId": "u6fq8Ysf670",
-      "customer": {
-        "name": "Abdullah",
-        "email": "abdullahvallanchira762@gmail.com",
-        "phone": "8078789276"
-      },
-      "shippingAddress": {
-        "address": "hajkhdgskdfjhdk jdhfkjfk",
-        "city": "manjeri",
-        "state": "kerala",
-        "pincode": "123456"
-      },
-      "items": [
-        {
-          "id": "2",
-          "name": "Nomad All-Weather Jacket",
-          "category": "Riding Gear",
-          "price": 6199,
-          "duration": "10 Days",
-          "difficulty": "Expert",
-          "stock": 5,
-          "featured": true,
-          "rating": 4.8,
-          "image": "/images/products/jackets.png",
-          "description": "Mil-spec ballistic nylon jacket with integrated CE Level 2 armor and windproof membrane.",
-          "quantity": 1
-        },
-        {
-          "id": "3",
-          "name": "Alpine 3-Season Tent",
-          "category": "Camping",
-          "price": 3799,
-          "duration": "12 Days",
-          "difficulty": "Moderate",
-          "stock": 12,
-          "featured": true,
-          "rating": 4.7,
-          "image": "/images/products/tent.png",
-          "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps.",
-          "quantity": 1
-        }
-      ],
-      "total": 9998,
-      "status": "Cancelled",
-      "createdAt": "2026-09-23T09:15:08.380Z",
-      "id": "_k7iNK_N39A"
-    }
-  ],
+  "orders": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

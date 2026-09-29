@@ -70,6 +70,10 @@ export default function Products() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [hoveredProduct, setHoveredProduct] = useState(null);
+  const [hoverDirection, setHoverDirection] = useState(null);
+  const [imageIndexes, setImageIndexes] = useState({});
+
   const itemsPerPage = 8;
 
   // =========================================================
@@ -242,6 +246,86 @@ export default function Products() {
     );
   };
 
+
+/* =========================================
+   HOVER IMAGE NAVIGATION
+========================================= */
+
+const getProductImages = (product) => {
+  if (product.images && product.images.length > 0) {
+    return product.images.filter(
+      (image) => image && image.trim() !== ""
+    );
+  }
+
+  return product.image ? [product.image] : [];
+};
+
+const handleImageHover = (event, product) => {
+  const images = getProductImages(product);
+
+  if (images.length <= 1) {
+    return;
+  }
+
+  const rect =
+    event.currentTarget.getBoundingClientRect();
+
+  const mouseX =
+    event.clientX - rect.left;
+
+  const middle = rect.width / 2;
+
+  const direction =
+    mouseX < middle ? "left" : "right";
+
+  if (
+    hoveredProduct === product.id &&
+    hoverDirection === direction
+  ) {
+    return;
+  }
+
+  setHoveredProduct(product.id);
+  setHoverDirection(direction);
+
+  setImageIndexes((previous) => {
+    const currentIndex =
+      previous[product.id] ?? 0;
+
+    let nextIndex = currentIndex;
+
+    if (direction === "left") {
+      nextIndex = Math.max(
+        0,
+        currentIndex - 1
+      );
+    }
+
+    if (direction === "right") {
+      nextIndex = Math.min(
+        images.length - 1,
+        currentIndex + 1
+      );
+    }
+
+    return {
+      ...previous,
+      [product.id]: nextIndex,
+    };
+  });
+};
+
+const handleImageMouseLeave = (product) => {
+  setHoveredProduct(null);
+  setHoverDirection(null);
+
+  setImageIndexes((previous) => ({
+    ...previous,
+    [product.id]: 0,
+  }));
+};
+
   // =========================================================
   // PAGE
   // =========================================================
@@ -398,50 +482,65 @@ export default function Products() {
             >
 
               {/* IMAGE */}
+<div
+  className="product-image-wrapper"
+  onMouseMove={(event) =>
+    handleImageHover(event, item)
+  }
+  onMouseLeave={() =>
+    handleImageMouseLeave(item)
+  }
+>
 
-              <div className="product-image-wrapper">
+  <Link
+    to={`/products/${item.id}`}
+    className="product-image-link"
+  >
+    <img
+      src={
+        getProductImages(item)[
+          imageIndexes[item.id] ?? 0
+        ] || item.image
+      }
+      alt={item.name}
+      className="product-card-image"
+    />
+  </Link>
 
-                <Link
-                  to={`/products/${item.id}`}
-                  className="product-image-link"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="product-card-image"
-                  />
-                </Link>
+  {getProductImages(item).length > 1 && (
+    <>
+      <span className="product-hover-zone product-hover-zone-left" />
+      <span className="product-hover-zone product-hover-zone-right" />
+    </>
+  )}
 
-                {/* WISHLIST */}
+  {/* WISHLIST */}
 
-                <button
-                  type="button"
-                  className={`product-wishlist ${
-                    isFavorite
-                      ? "active"
-                      : ""
-                  }`}
-                  onClick={() =>
-                    handleWishlist(item)
-                  }
-                  aria-label={
-                    isFavorite
-                      ? "Remove from wishlist"
-                      : "Add to wishlist"
-                  }
-                  title={
-                    isFavorite
-                      ? "Remove from wishlist"
-                      : "Add to wishlist"
-                  }
-                >
-                  <span className="material-symbols-outlined">
-                    favorite
-                  </span>
-                </button>
+  <button
+    type="button"
+    className={`product-wishlist ${
+      isFavorite ? "active" : ""
+    }`}
+    onClick={() =>
+      handleWishlist(item)
+    }
+    aria-label={
+      isFavorite
+        ? "Remove from wishlist"
+        : "Add to wishlist"
+    }
+    title={
+      isFavorite
+        ? "Remove from wishlist"
+        : "Add to wishlist"
+    }
+  >
+    <span className="material-symbols-outlined">
+      favorite
+    </span>
+  </button>
 
-              </div>
-
+</div>
               {/* CATEGORY */}
 
               <span className="product-category">

@@ -42,6 +42,10 @@ const isAuthenticated = useSelector(
 
   const [activeCategory, setActiveCategory] = useState("All");
 
+const [hoveredProduct, setHoveredProduct] = useState(null);
+const [hoverDirection, setHoverDirection] = useState(null);
+const [imageIndexes, setImageIndexes] = useState({});
+
   /* =========================================
      WISHLIST
   ========================================= */
@@ -132,6 +136,81 @@ const handleAddToCart = (product) => {
   toast.success("Added to your cart");
 };
 
+/* =========================================
+   HOVER IMAGE NAVIGATION
+========================================= */
+
+const getProductImages = (product) => {
+  if (product.images && product.images.length > 0) {
+    return product.images.filter(
+      (image) => image && image.trim() !== ""
+    );
+  }
+
+  return product.image ? [product.image] : [];
+};
+
+const handleImageHover = (event, product) => {
+  const images = getProductImages(product);
+
+  if (images.length <= 1) {
+    return;
+  }
+
+  const rect = event.currentTarget.getBoundingClientRect();
+  const mouseX = event.clientX - rect.left;
+  const middle = rect.width / 2;
+
+  const direction =
+    mouseX < middle ? "left" : "right";
+
+  if (
+    hoveredProduct === product.id &&
+    hoverDirection === direction
+  ) {
+    return;
+  }
+
+  setHoveredProduct(product.id);
+  setHoverDirection(direction);
+
+  setImageIndexes((previous) => {
+    const currentIndex =
+      previous[product.id] ?? 0;
+
+    let nextIndex = currentIndex;
+
+    if (direction === "left") {
+      nextIndex = Math.max(
+        0,
+        currentIndex - 1
+      );
+    }
+
+    if (direction === "right") {
+      nextIndex = Math.min(
+        images.length - 1,
+        currentIndex + 1
+      );
+    }
+
+    return {
+      ...previous,
+      [product.id]: nextIndex,
+    };
+  });
+};
+
+const handleImageMouseLeave = (product) => {
+  setHoveredProduct(null);
+  setHoverDirection(null);
+
+  setImageIndexes((previous) => ({
+    ...previous,
+    [product.id]: 0,
+  }));
+};
+
   return (
     <section className="featured-expeditions">
 
@@ -217,70 +296,82 @@ const handleAddToCart = (product) => {
               {/* =========================================
                   IMAGE
               ========================================= */}
+<div
+  className="image-wrapper"
+  onMouseMove={(event) =>
+    handleImageHover(event, item)
+  }
+  onMouseLeave={() =>
+    handleImageMouseLeave(item)
+  }
+>
 
-              <div className="image-wrapper">
+  <Link
+    to={`/products/${item.id}`}
+    className="product-image-link"
+  >
+    <img
+      src={
+        getProductImages(item)[
+          imageIndexes[item.id] ?? 0
+        ] || item.image
+      }
+      alt={item.name}
+    />
+  </Link>
 
-                {/* Clicking image → Product Details */}
-                <Link
-                  to={`/products/${item.id}`}
-                  className="product-image-link"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                  />
-                </Link>
+  {/* Hover navigation indicators */}
+  {getProductImages(item).length > 1 && (
+    <>
+      <span className="image-hover-zone image-hover-zone-left" />
+      <span className="image-hover-zone image-hover-zone-right" />
+    </>
+  )}
 
+  {/* Category */}
+  <span className="category-pill">
+    {item.category}
+  </span>
 
-                {/* Category */}
-                <span className="category-pill">
-                  {item.category}
-                </span>
+  {/* Wishlist */}
+  <button
+    type="button"
+    className={`favorite-btn ${
+      isFav ? "active" : ""
+    }`}
+    onClick={() => toggleFavorite(item)}
+    title={
+      isFav
+        ? "Remove from favorites"
+        : "Add to favorites"
+    }
+    aria-label={
+      isFav
+        ? "Remove from wishlist"
+        : "Add to wishlist"
+    }
+  >
+    <svg
+      viewBox="0 0 24 24"
+      fill={
+        isFav
+          ? "#e74c3c"
+          : "none"
+      }
+      stroke={
+        isFav
+          ? "#e74c3c"
+          : "#ffffff"
+      }
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </svg>
+  </button>
 
-
-                {/* Wishlist */}
-                <button
-                  type="button"
-                  className={`favorite-btn ${
-                    isFav ? "active" : ""
-                  }`}
-                  onClick={() =>
-                    toggleFavorite(item)
-                  }
-                  title={
-                    isFav
-                      ? "Remove from favorites"
-                      : "Add to favorites"
-                  }
-                  aria-label={
-                    isFav
-                      ? "Remove from wishlist"
-                      : "Add to wishlist"
-                  }
-                >
-
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill={
-                      isFav
-                        ? "#e74c3c"
-                        : "none"
-                    }
-                    stroke={
-                      isFav
-                        ? "#e74c3c"
-                        : "#ffffff"
-                    }
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                  </svg>
-
-                </button>
-
-              </div>
+</div>
 
 
               {/* =========================================

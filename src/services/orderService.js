@@ -21,6 +21,16 @@ export const getOrdersByUser = async (userId) => {
 };
 
 // =========================================================
+// GET ALL ORDERS - ADMIN
+// =========================================================
+
+export const getAllOrders = async () => {
+  const response = await api.get("/orders");
+
+  return response.data;
+};
+
+// =========================================================
 // UPDATE ORDER
 // =========================================================
 

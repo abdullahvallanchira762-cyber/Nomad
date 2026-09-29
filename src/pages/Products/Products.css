@@ -568,3 +568,30 @@
 
   font-weight: 700;
 }
+
+/* =========================================
+   HOVER IMAGE NAVIGATION
+========================================= */
+
+.product-hover-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.product-hover-zone-left {
+  left: 0;
+  cursor: w-resize;
+}
+
+.product-hover-zone-right {
+  right: 0;
+  cursor: e-resize;
+}
+
+.product-image-wrapper {
+  cursor: default;
+}

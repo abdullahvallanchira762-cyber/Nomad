@@ -27,6 +27,12 @@ function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const [message, setMessage] = useState("");
 
+  const [detailImageIndex, setDetailImageIndex] =
+  useState(0);
+
+const [detailHoverDirection, setDetailHoverDirection] =
+  useState(null);
+
   const navigate = useNavigate();
 
 const isAuthenticated = useSelector(
@@ -122,6 +128,60 @@ const handleWishlist = () => {
   }
 };
 
+/* =========================================
+   PRODUCT DETAIL IMAGE GALLERY
+========================================= */
+
+const productImages =
+  selectedProduct?.images &&
+  selectedProduct.images.length > 0
+    ? selectedProduct.images.filter(
+        (image) =>
+          image && image.trim() !== ""
+      )
+    : selectedProduct?.image
+    ? [selectedProduct.image]
+    : [];
+
+const handleDetailImageHover = (event) => {
+  if (productImages.length <= 1) {
+    return;
+  }
+
+  const rect =
+    event.currentTarget.getBoundingClientRect();
+
+  const mouseX =
+    event.clientX - rect.left;
+
+  const middle = rect.width / 2;
+
+  const direction =
+    mouseX < middle ? "left" : "right";
+
+  if (detailHoverDirection === direction) {
+    return;
+  }
+
+  setDetailHoverDirection(direction);
+
+  setDetailImageIndex((currentIndex) => {
+    if (direction === "left") {
+      return Math.max(0, currentIndex - 1);
+    }
+
+    return Math.min(
+      productImages.length - 1,
+      currentIndex + 1
+    );
+  });
+};
+
+const handleDetailImageLeave = () => {
+  setDetailHoverDirection(null);
+  setDetailImageIndex(0);
+};
+
   if (detailsLoading) {
     return (
       <div className="product-details-state">
@@ -170,21 +230,50 @@ const handleWishlist = () => {
         <div className="product-details-grid">
 
           {/* Product Image */}
-          <div className="product-details-image-wrapper">
+          <div
+  className="product-details-image-wrapper"
+  onMouseMove={handleDetailImageHover}
+  onMouseLeave={handleDetailImageLeave}
+>
 
-            <img
-              src={selectedProduct.image}
-              alt={selectedProduct.name}
-              className="product-details-image"
-            />
+  <img
+    src={
+      productImages[detailImageIndex] ||
+      selectedProduct.image
+    }
+    alt={selectedProduct.name}
+    className="product-details-image"
+  />
 
-            {selectedProduct.stock === 0 && (
-              <span className="product-stock-overlay">
-                OUT OF STOCK
-              </span>
-            )}
+  {productImages.length > 1 && (
+    <>
+      <span className="detail-hover-zone detail-hover-zone-left">
+        <span className="material-symbols-outlined">
+          chevron_left
+        </span>
+      </span>
 
-          </div>
+      <span className="detail-hover-zone detail-hover-zone-right">
+        <span className="material-symbols-outlined">
+          chevron_right
+        </span>
+      </span>
+    </>
+  )}
+
+  {selectedProduct.stock === 0 && (
+    <span className="product-stock-overlay">
+      OUT OF STOCK
+    </span>
+  )}
+
+  {productImages.length > 1 && (
+    <div className="detail-image-counter">
+      {detailImageIndex + 1} / {productImages.length}
+    </div>
+  )}
+
+</div>
 
           {/* Product Information */}
           <div className="product-details-info">

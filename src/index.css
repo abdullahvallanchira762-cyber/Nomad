@@ -65,3 +65,40 @@ ul,
 ol {
   list-style: none;
 }
+
+/* =========================================
+   NOMAD SCROLLBAR
+========================================= */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #4a4b47 #121314;
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #4a4b47 #121314;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121314;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a4b47;
+  border: 2px solid #121314;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c4a87c;
+}
+
+::-webkit-scrollbar-corner {
+  background: #121314;
+}
