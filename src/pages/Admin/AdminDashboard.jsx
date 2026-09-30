@@ -1,8 +1,8 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   BarChart,
   Bar,
   XAxis,
@@ -20,6 +20,8 @@ import "./AdminDashboard.css";
 
 function AdminDashboard() {
   const dispatch = useDispatch();
+
+  const [activityType, setActivityType] = useState("orders");
 
   /* =========================================================
      REDUX DATA
@@ -72,84 +74,98 @@ function AdminDashboard() {
   }, [orders]);
 
   /* =========================================================
-     ORDER / USER CHART DATA
-  ========================================================= */
-
-  const activityData = useMemo(() => {
-    const dataMap = {};
-
-    orders.forEach((order) => {
-      if (!order.createdAt) return;
-
-      const date = new Date(order.createdAt);
-
-      if (Number.isNaN(date.getTime())) return;
-
-      const key = date.toISOString().split("T")[0];
-
-      if (!dataMap[key]) {
-        dataMap[key] = {
-          date: key,
-          orders: 0,
-          users: 0,
-        };
-      }
-
-      dataMap[key].orders += 1;
-    });
-
-    users.forEach((user) => {
-      if (!user.createdAt) return;
-
-      const date = new Date(user.createdAt);
-
-      if (Number.isNaN(date.getTime())) return;
-
-      const key = date.toISOString().split("T")[0];
-
-      if (!dataMap[key]) {
-        dataMap[key] = {
-          date: key,
-          orders: 0,
-          users: 0,
-        };
-      }
-
-      dataMap[key].users += 1;
-    });
-
-    return Object.values(dataMap)
-      .sort(
-        (a, b) =>
-          new Date(a.date) - new Date(b.date)
-      )
-      .map((item) => ({
-        ...item,
-        label: new Date(
-          item.date
-        ).toLocaleDateString("en-IN", {
-          day: "2-digit",
-          month: "short",
-        }),
-      }));
-  }, [orders, users]);
-
-  /* =========================================================
      STOCK CHART DATA
   ========================================================= */
 
   const stockData = useMemo(() => {
-    return products
-      .map((product) => ({
-        name:
-          product.name?.length > 18
-            ? `${product.name.slice(0, 18)}...`
-            : product.name,
-
-        stock: Number(product.stock || 0),
-      }))
-      .sort((a, b) => b.stock - a.stock);
+    return products.map((product) => ({
+      name: product.name,
+      stock: Number(product.stock || 0),
+    }));
   }, [products]);
+
+  /* =========================================================
+     ORDER / USER ACTIVITY DATA
+  ========================================================= */
+
+  const activityData = useMemo(() => {
+    const data = [];
+
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date();
+
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate() - i);
+
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const day = date.getDate();
+
+      const key = [
+        year,
+        String(month + 1).padStart(2, "0"),
+        String(day).padStart(2, "0"),
+      ].join("-");
+
+      /* -------------------------------------------------------
+         ORDERS CREATED ON THIS DAY
+      ------------------------------------------------------- */
+
+      const orderCount = orders.filter((order) => {
+        if (!order.createdAt) {
+          return false;
+        }
+
+        const orderDate = new Date(order.createdAt);
+
+        if (Number.isNaN(orderDate.getTime())) {
+          return false;
+        }
+
+        return (
+          orderDate.getFullYear() === year &&
+          orderDate.getMonth() === month &&
+          orderDate.getDate() === day
+        );
+      }).length;
+
+      /* -------------------------------------------------------
+         USERS CREATED ON THIS DAY
+      ------------------------------------------------------- */
+
+      const userCount = users.filter((user) => {
+        if (!user.createdAt) {
+          return false;
+        }
+
+        const userDate = new Date(user.createdAt);
+
+        if (Number.isNaN(userDate.getTime())) {
+          return false;
+        }
+
+        return (
+          userDate.getFullYear() === year &&
+          userDate.getMonth() === month &&
+          userDate.getDate() === day
+        );
+      }).length;
+
+      data.push({
+        date: key,
+
+        label: date.toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "short",
+        }),
+
+        orders: orderCount,
+        users: userCount,
+      });
+    }
+
+    return data;
+  }, [orders, users]);
 
   /* =========================================================
      PRICE FORMAT
@@ -162,6 +178,15 @@ function AdminDashboard() {
       maximumFractionDigits: 0,
     }).format(price || 0);
   };
+
+  /* =========================================================
+     TOOLTIP LABEL
+  ========================================================= */
+
+  const activityName =
+    activityType === "orders"
+      ? "Orders"
+      : "Users";
 
   return (
     <section className="admin-dashboard">
@@ -340,7 +365,7 @@ function AdminDashboard() {
         <div className="admin-chart-grid">
 
           {/* =================================================
-              ORDERS + USERS
+              ORDERS / USERS ACTIVITY
           ================================================= */}
 
           <div className="admin-chart-card">
@@ -364,6 +389,47 @@ function AdminDashboard() {
             </div>
 
 
+            {/* =================================================
+                ACTIVITY TOGGLE
+            ================================================= */}
+
+            <div className="admin-activity-toggle">
+
+              <button
+                type="button"
+                className={
+                  activityType === "orders"
+                    ? "active"
+                    : ""
+                }
+                onClick={() =>
+                  setActivityType("orders")
+                }
+              >
+                Orders
+              </button>
+
+              <button
+                type="button"
+                className={
+                  activityType === "users"
+                    ? "active"
+                    : ""
+                }
+                onClick={() =>
+                  setActivityType("users")
+                }
+              >
+                Users
+              </button>
+
+            </div>
+
+
+            {/* =================================================
+                ACTIVITY CHART
+            ================================================= */}
+
             <div className="admin-chart">
 
               {activityData.length === 0 ? (
@@ -375,7 +441,7 @@ function AdminDashboard() {
                   </span>
 
                   <p>
-                    No dated activity available
+                    No activity available
                   </p>
 
                 </div>
@@ -387,20 +453,48 @@ function AdminDashboard() {
                   height="100%"
                 >
 
-                  <LineChart
+                  <AreaChart
                     data={activityData}
                     margin={{
-                      top: 10,
+                      top: 15,
                       right: 10,
                       left: -20,
                       bottom: 0,
                     }}
                   >
 
+                    <defs>
+
+                      <linearGradient
+                        id="activityGradient"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+
+                        <stop
+                          offset="0%"
+                          stopColor="#c4a87c"
+                          stopOpacity={0.28}
+                        />
+
+                        <stop
+                          offset="100%"
+                          stopColor="#c4a87c"
+                          stopOpacity={0}
+                        />
+
+                      </linearGradient>
+
+                    </defs>
+
+
                     <CartesianGrid
-                      stroke="rgba(242,239,231,0.08)"
+                      stroke="rgba(242,239,231,0.07)"
                       vertical={false}
                     />
+
 
                     <XAxis
                       dataKey="label"
@@ -413,58 +507,60 @@ function AdminDashboard() {
                       tickLine={false}
                     />
 
+
                     <YAxis
-                      stroke="#777872"
                       allowDecimals={false}
+                      stroke="#777872"
                       tick={{
                         fill: "#777872",
                         fontSize: 10,
                       }}
                       axisLine={false}
                       tickLine={false}
+                      width={30}
                     />
 
+
                     <Tooltip
+                      cursor={{
+                        stroke:
+                          "rgba(196,168,124,0.25)",
+                        strokeWidth: 1,
+                      }}
                       contentStyle={{
                         background: "#1a1b1c",
                         border:
                           "1px solid rgba(242,239,231,0.12)",
-                        borderRadius: "8px",
+                        borderRadius: "6px",
                         color: "#f2efe7",
+                        fontSize: "11px",
+                      }}
+                      labelStyle={{
+                        color: "#f2efe7",
+                        marginBottom: "5px",
+                      }}
+                      itemStyle={{
+                        color: "#c4a87c",
                       }}
                     />
 
-                    <Line
+
+                    <Area
                       type="monotone"
-                      dataKey="orders"
-                      name="Orders"
+                      dataKey={activityType}
+                      name={activityName}
                       stroke="#c4a87c"
                       strokeWidth={2}
-                      dot={{
-                        r: 3,
+                      fill="url(#activityGradient)"
+                      dot={false}
+                      activeDot={{
+                        r: 5,
+                        strokeWidth: 2,
                         fill: "#c4a87c",
                       }}
-                      activeDot={{
-                        r: 5,
-                      }}
                     />
 
-                    <Line
-                      type="monotone"
-                      dataKey="users"
-                      name="Users"
-                      stroke="#a6a39b"
-                      strokeWidth={2}
-                      dot={{
-                        r: 3,
-                        fill: "#a6a39b",
-                      }}
-                      activeDot={{
-                        r: 5,
-                      }}
-                    />
-
-                  </LineChart>
+                  </AreaChart>
 
                 </ResponsiveContainer>
 
@@ -473,16 +569,22 @@ function AdminDashboard() {
             </div>
 
 
-            <div className="admin-chart-legend">
+            {/* =================================================
+                ACTIVITY FOOTER
+            ================================================= */}
+
+            <div className="admin-chart-footer">
 
               <span>
-                <i className="legend-orders" />
-                Orders
+                <i className="legend-activity" />
+
+                {activityType === "orders"
+                  ? "Orders placed"
+                  : "Users registered"}
               </span>
 
               <span>
-                <i className="legend-users" />
-                Users
+                Last 7 days
               </span>
 
             </div>
@@ -554,6 +656,7 @@ function AdminDashboard() {
                       horizontal={false}
                     />
 
+
                     <XAxis
                       type="number"
                       allowDecimals={false}
@@ -565,6 +668,7 @@ function AdminDashboard() {
                       axisLine={false}
                       tickLine={false}
                     />
+
 
                     <YAxis
                       type="category"
@@ -579,9 +683,11 @@ function AdminDashboard() {
                       tickLine={false}
                     />
 
+
                     <Tooltip
                       cursor={{
-                        fill: "rgba(242,239,231,0.04)",
+                        fill:
+                          "rgba(242,239,231,0.04)",
                       }}
                       contentStyle={{
                         background: "#1a1b1c",
@@ -592,11 +698,17 @@ function AdminDashboard() {
                       }}
                     />
 
+
                     <Bar
                       dataKey="stock"
                       name="Stock"
                       fill="#c4a87c"
-                      radius={[0, 4, 4, 0]}
+                      radius={[
+                        0,
+                        4,
+                        4,
+                        0,
+                      ]}
                       barSize={14}
                     />
 
@@ -638,10 +750,13 @@ function AdminDashboard() {
 
         <div className="admin-quick-grid">
 
+          {/* PRODUCTS */}
+
           <a
             href="/admin/products"
             className="admin-quick-card"
           >
+
             <span className="material-symbols-outlined">
               inventory_2
             </span>
@@ -659,13 +774,17 @@ function AdminDashboard() {
             <span className="material-symbols-outlined arrow">
               arrow_forward
             </span>
+
           </a>
 
+
+          {/* USERS */}
 
           <a
             href="/admin/users"
             className="admin-quick-card"
           >
+
             <span className="material-symbols-outlined">
               group
             </span>
@@ -683,13 +802,17 @@ function AdminDashboard() {
             <span className="material-symbols-outlined arrow">
               arrow_forward
             </span>
+
           </a>
 
+
+          {/* ORDERS */}
 
           <a
             href="/admin/orders"
             className="admin-quick-card"
           >
+
             <span className="material-symbols-outlined">
               receipt_long
             </span>
@@ -707,6 +830,7 @@ function AdminDashboard() {
             <span className="material-symbols-outlined arrow">
               arrow_forward
             </span>
+
           </a>
 
         </div>

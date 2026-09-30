@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { logout } from "../redux/slice/authSlice";
+import { adminLogout } from "../redux/slice/adminAuthSlice";
 
 import "./AdminLayout.css";
 
@@ -9,10 +9,10 @@ function AdminLayout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.auth.user);
+  const admin = useSelector((state) => state.adminAuth.admin);
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(adminLogout());
     navigate("/admin/login", { replace: true });
   };
 
@@ -29,16 +29,16 @@ function AdminLayout() {
 
           {/* LOGO */}
 
-<NavLink
-  to="/admin"
-  className="admin-brand"
->
-  <img
-    src="/images/logo/logo.png"
-    alt="Nomad Outdoor Expedition"
-    className="admin-brand-logo"
-  />
-</NavLink>
+          <NavLink
+            to="/admin"
+            className="admin-brand"
+          >
+            <img
+              src="/images/logo/logo.png"
+              alt="Nomad Outdoor Expedition"
+              className="admin-brand-logo"
+            />
+          </NavLink>
 
 
           {/* NAVIGATION */}
@@ -164,7 +164,7 @@ function AdminLayout() {
           <div className="admin-header-left">
 
             <span className="admin-header-eyebrow">
-              NOMAD / ADMIN
+               ADMIN
             </span>
 
             <h1>
@@ -179,7 +179,7 @@ function AdminLayout() {
             <div className="admin-user">
 
               <div className="admin-user-avatar">
-                {user?.name
+                {admin?.name
                   ?.charAt(0)
                   ?.toUpperCase() || "A"}
               </div>
@@ -187,7 +187,7 @@ function AdminLayout() {
               <div className="admin-user-details">
 
                 <span className="admin-user-name">
-                  {user?.name || "Admin"}
+                  {admin?.name || "Admin"}
                 </span>
 
                 <span className="admin-user-role">

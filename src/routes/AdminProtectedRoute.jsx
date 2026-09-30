@@ -2,13 +2,13 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function AdminProtectedRoute() {
-  const { user, isAuthenticated } = useSelector(
-    (state) => state.auth
+  const { admin, isAuthenticated } = useSelector(
+    (state) => state.adminAuth
   );
 
   const location = useLocation();
 
-  // Not logged in
+  // Admin is not logged in
   if (!isAuthenticated) {
     return (
       <Navigate
@@ -20,8 +20,13 @@ function AdminProtectedRoute() {
   }
 
   // Logged in but not an admin
-  if (user?.role !== "admin") {
+  if (admin?.role !== "admin") {
     return <Navigate to="/" replace />;
+  }
+
+  // Admin account is blocked
+  if (admin?.status === "blocked") {
+    return <Navigate to="/admin/login" replace />;
   }
 
   // Admin authenticated

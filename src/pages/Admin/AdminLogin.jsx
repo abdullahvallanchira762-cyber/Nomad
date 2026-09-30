@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { loginSuccess } from "../../redux/slice/authSlice";
+import { adminLoginSuccess } from "../../redux/slice/adminAuthSlice";
 import { loginUser } from "../../services/userService";
+
+import "./AdminLogin.css";
 
 function AdminLogin() {
   const dispatch = useDispatch();
@@ -14,6 +16,10 @@ function AdminLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handleClose = () => {
+    navigate("/");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +40,7 @@ function AdminLogin() {
         return;
       }
 
-      dispatch(loginSuccess(user));
+      dispatch(adminLoginSuccess(user));
 
       const redirectTo =
         location.state?.from?.pathname || "/admin";
@@ -48,43 +54,111 @@ function AdminLogin() {
   };
 
   return (
-    <div>
-      <h1>Nomad Admin</h1>
+    <div className="admin-auth-page">
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
+      <div
+        className="admin-auth-backdrop"
+        onClick={handleClose}
+      />
 
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Admin email"
-            required
-          />
-        </div>
-
-        <div>
-          <label>Password</label>
-
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Admin password"
-            required
-          />
-        </div>
-
-        {error && <p>{error}</p>}
+      <div className="admin-auth-card">
 
         <button
-          type="submit"
-          disabled={loading}
+          type="button"
+          className="admin-auth-close"
+          onClick={handleClose}
+          aria-label="Close admin login"
         >
-          {loading ? "Signing in..." : "Admin Login"}
+          ×
         </button>
-      </form>
+
+        <div className="admin-auth-header">
+
+          <div className="admin-logo">
+  <img src="/images/logo/logo.png" alt="Nomad" />
+</div>
+
+          {/* <h3>
+            ADMIN LOGIN
+          </h3> */}
+
+          <p>
+            Sign in to manage your Nomad expedition store.
+          </p>
+
+        </div>
+
+        {error && (
+          <div className="admin-auth-error">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+
+          <div className="admin-form-group">
+
+            <label htmlFor="admin-email">
+              EMAIL
+            </label>
+
+            <input
+              id="admin-email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your admin email"
+              autoComplete="email"
+              required
+            />
+
+          </div>
+
+          <div className="admin-form-group">
+
+            <label htmlFor="admin-password">
+              PASSWORD
+            </label>
+
+            <input
+              id="admin-password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your admin password"
+              autoComplete="current-password"
+              required
+            />
+
+          </div>
+
+          <button
+            type="submit"
+            className="admin-auth-submit"
+            disabled={loading}
+          >
+            {loading ? "LOGGING IN..." : "ADMIN LOGIN"}
+          </button>
+
+        </form>
+
+        <div className="admin-auth-footer">
+
+          <span>
+            NOMAD ADMIN PORTAL
+          </span>
+
+          <button
+            type="button"
+            onClick={handleClose}
+          >
+            BACK TO STORE
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

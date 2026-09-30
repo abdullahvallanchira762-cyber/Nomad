@@ -1,6 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
 // Admin
+import AdminPublicRoute from "./AdminPublicRoute";
+
 import AdminLayout from "../layout/AdminLayout";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 
@@ -129,11 +131,9 @@ function AppRoutes() {
             ADMIN LOGIN
         ===================================================== */}
 
-        <Route
-          path="/admin/login"
-          element={<AdminLogin />}
-        />
-
+        <Route element={<AdminPublicRoute />}>
+          <Route path="/admin/login" element={<AdminLogin />} />
+        </Route>
 
         {/* =====================================================
             ADMIN APPLICATION

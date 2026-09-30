@@ -7,7 +7,7 @@
       "price": 4499,
       "duration": "7 Days",
       "difficulty": "Challenging",
-      "stock": 8,
+      "stock": 10,
       "featured": true,
       "rating": 4.9,
       "image": "/images/products/helmet.png",
@@ -169,6 +169,59 @@
       "id": "KiQ8nraQObI"
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "userId": "KiQ8nraQObI",
+      "customer": {
+        "name": "Abdullah",
+        "email": "abdullahvallanchira762@gmail.com",
+        "phone": "8848325562"
+      },
+      "shippingAddress": {
+        "address": "vallanchira House KAruvanbram (po)",
+        "city": "manjeri",
+        "state": "kerala",
+        "pincode": "676123"
+      },
+      "items": [
+        {
+          "id": "2",
+          "name": "Nomad All-Weather Jacket",
+          "category": "Riding Gear",
+          "price": 6199,
+          "duration": "10 Days",
+          "difficulty": "Expert",
+          "stock": 5,
+          "featured": true,
+          "rating": 4.8,
+          "image": "/images/products/jackets.png",
+          "description": "Mil-spec ballistic nylon jacket with integrated CE Level 2 armor and windproof membrane.",
+          "images": [
+            "/images/products/jackets.png",
+            "/images/products/jacket-back.png"
+          ],
+          "quantity": 3
+        },
+        {
+          "id": "3",
+          "name": "Alpine 3-Season Tent",
+          "category": "Camping",
+          "price": 3799,
+          "duration": "12 Days",
+          "difficulty": "Moderate",
+          "stock": 12,
+          "featured": true,
+          "rating": 4.7,
+          "image": "/images/products/tent.png",
+          "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps.",
+          "quantity": 2
+        }
+      ],
+      "total": 26195,
+      "status": "Placed",
+      "createdAt": "2026-09-30T07:13:53.896Z",
+      "id": "f4ZBnp3HKlg"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
