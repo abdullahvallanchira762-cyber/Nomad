@@ -149,6 +149,40 @@
       "rating": 4.9,
       "image": "/images/products/helmet-three.png",
       "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings."
+    },
+    {
+      "name": "BLACK DIAMOND Trail Pro Shock Trekking Poles",
+      "category": "Camping",
+      "price": 1799,
+      "duration": "6 Days",
+      "difficulty": "Expert",
+      "stock": 6,
+      "featured": false,
+      "rating": 4.7,
+      "image": "/images/products/stick.png",
+      "images": [
+        "/images/products/stick.png",
+        "/images/products/stickdetail.png"
+      ],
+      "description": "Trail Pro Shock Trekking Poles 105-140 cm (Shock Grip), Granite",
+      "id": "oZIOqUI8Ek8"
+    },
+    {
+      "name": "Windproof Camping Stove with Adaptesr Bags for Outdoor",
+      "category": "Camping",
+      "price": 1499,
+      "duration": "5 Days",
+      "difficulty": "Challenging",
+      "stock": 4,
+      "featured": false,
+      "rating": 4.7,
+      "image": "/images/products/stove.png",
+      "images": [
+        "/images/products/stove.png",
+        "/images/products/stovesize.png"
+      ],
+      "description": "7200W Windproof Camping Stove with Adaptesr Bags for Outdoor",
+      "id": "G3TeX6uIN58"
     }
   ],
   "users": [
