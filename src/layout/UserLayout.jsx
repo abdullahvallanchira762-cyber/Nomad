@@ -11,8 +11,18 @@ import { setWishlistUser } from "../redux/slice/wishlistSlice";
 function UserLayout() {
   const dispatch = useDispatch();
 
-  const user = useSelector(
-    (state) => state.auth.user
+  const user = useSelector((state) => state.auth.user);
+
+  const admin = useSelector((state) => state.adminAuth.admin);
+  const isAuthenticated = useSelector(
+    (state) => state.adminAuth.isAuthenticated
+  );
+
+  const isAdminLoggedIn = Boolean(
+    isAuthenticated &&
+    admin &&
+    admin.role === "admin" &&
+    admin.status === "active"
   );
 
   useEffect(() => {
@@ -24,7 +34,7 @@ function UserLayout() {
 
   return (
     <>
-      <Navbar />
+      <Navbar showAdminPanel={isAdminLoggedIn} />
 
       <main>
         <Outlet />

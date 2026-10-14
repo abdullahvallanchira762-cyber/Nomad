@@ -57,6 +57,7 @@ function AdminUsers() {
     setPage(1);
   };
 
+
   const handleStatusChange = async (user) => {
     const newStatus =
       user.status === "blocked" ? "active" : "blocked";
@@ -78,6 +79,8 @@ function AdminUsers() {
       toast.error(error || "Failed to update user");
     }
   };
+
+
 
   if (loading) {
     return (

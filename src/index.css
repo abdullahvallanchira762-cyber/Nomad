@@ -102,3 +102,11 @@ body {
 ::-webkit-scrollbar-corner {
   background: #121314;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+#basecamp-dispatch {
+  scroll-margin-top: 80px;
+}

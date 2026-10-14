@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { loginUser } from "../../services/userService";
 import { loginSuccess } from "../../redux/slice/authSlice";
+import { adminLoginSuccess } from "../../redux/slice/adminAuthSlice";
 
 import "./Login.css";
 
@@ -22,24 +22,28 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const from = location.state?.from?.pathname || "/";
+  const accountBlocked = location.state?.accountBlocked === true;
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    setFormData((previousData) => ({
+      ...previousData,
+      [name]: value,
+    }));
+
+    setError("");
   };
 
   const handleClose = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setError("");
 
-    if (!formData.email || !formData.password) {
+    if (!formData.email.trim() || !formData.password) {
       setError("Please enter email and password.");
       return;
     }
@@ -47,23 +51,38 @@ function Login() {
     try {
       setLoading(true);
 
- const user = await loginUser(
-  formData.email,
-  formData.password
-);
+      const user = await loginUser(
+        formData.email.trim(),
+        formData.password
+      );
 
-if (user.status === "blocked") {
-  setError(
-    "Your account has been blocked. Please contact Nomad support."
-  );
-  return;
-}
+      if (!user) {
+        setError("Invalid email or password.");
+        return;
+      }
 
-dispatch(loginSuccess(user));
+      const status = String(user.status || "").toLowerCase();
 
-navigate(from, { replace: true });
+      if (status === "blocked" || user.isBlocked === true) {
+        setError(
+          "Your account has been blocked. Please contact Nomad support."
+        );
+        return;
+      }
 
+      // Admin and normal users use separate Redux authentication states.
+      if (user.role === "admin") {
+        if (status !== "active") {
+          setError("This admin account is not active.");
+          return;
+        }
 
+        dispatch(adminLoginSuccess(user));
+      } else {
+        dispatch(loginSuccess(user));
+      }
+
+      navigate(from, { replace: true });
     } catch (err) {
       setError(err.message || "Invalid email or password.");
     } finally {
@@ -73,7 +92,10 @@ navigate(from, { replace: true });
 
   return (
     <div className="auth-page">
-      <div className="auth-backdrop" onClick={handleClose} />
+      <div
+        className="auth-backdrop"
+        onClick={handleClose}
+      />
 
       <div className="auth-card">
         <button
@@ -95,17 +117,22 @@ navigate(from, { replace: true });
           </p>
         </div>
 
+        {accountBlocked && (
+          <div className="auth-error" role="alert">
+            Your account has been blocked by the administrator.
+            Please contact Nomad support for assistance.
+          </div>
+        )}
+
         {error && (
-          <div className="auth-error">
+          <div className="auth-error" role="alert">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">
-              EMAIL
-            </label>
+            <label htmlFor="email">EMAIL</label>
 
             <input
               id="email"
@@ -115,13 +142,12 @@ navigate(from, { replace: true });
               onChange={handleChange}
               placeholder="Enter your email"
               autoComplete="email"
+              required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">
-              PASSWORD
-            </label>
+            <label htmlFor="password">PASSWORD</label>
 
             <input
               id="password"
@@ -131,6 +157,7 @@ navigate(from, { replace: true });
               onChange={handleChange}
               placeholder="Enter your password"
               autoComplete="current-password"
+              required
             />
           </div>
 
@@ -145,6 +172,7 @@ navigate(from, { replace: true });
 
         <div className="auth-footer">
           <span>NEW TO NOMAD?</span>
+
           <Link
             to="/register"
             state={{ from: location.state?.from }}
@@ -158,4 +186,3 @@ navigate(from, { replace: true });
 }
 
 export default Login;
-

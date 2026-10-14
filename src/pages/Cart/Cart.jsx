@@ -9,10 +9,14 @@ import {
 
 import formatPrice from "../../utils/formatPrice";
 
+
+
 import "./Cart.css";
 
 function Cart() {
   const dispatch = useDispatch();
+
+ 
 
   const cartItems = useSelector(
     (state) => state.cart.items
@@ -58,7 +62,7 @@ function Cart() {
   const handleRemove = (id) => {
     dispatch(removeFromCart(id));
   };
-
+  
   if (cartItems.length === 0) {
     return (
       <section className="cart-page">

@@ -1474,3 +1474,40 @@
     width: 200px;
   }
 }
+
+
+.admin-order-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 30px 24px;
+  border-top: 1px solid var(--color-border, #303030);
+}
+
+.admin-cancel-order-button {
+  padding: 11px 20px;
+  border: 1px solid #a94444;
+  border-radius: 6px;
+  background: transparent;
+  color: #ff7777;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease,
+    color 0.2s ease;
+}
+
+.admin-cancel-order-button:hover:not(:disabled) {
+  background: #a94444;
+  color: #fff;
+}
+
+.admin-cancel-order-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-cancelled-message {
+  color: #ff7777;
+  font-size: 14px;
+}

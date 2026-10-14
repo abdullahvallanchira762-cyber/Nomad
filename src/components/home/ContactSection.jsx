@@ -77,7 +77,9 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="contact-section">
+    <section 
+    id="basecamp-dispatch"
+    className="contact-section">
       <div className="contact-container">
 
         {/* LEFT COLUMN */}

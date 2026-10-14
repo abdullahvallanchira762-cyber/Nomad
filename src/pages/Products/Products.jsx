@@ -167,6 +167,7 @@ export default function Products() {
   // =========================================================
 
   const handleAddToCart = (product) => {
+    
     if (!isAuthenticated) {
       toast("Please login to continue.");
 

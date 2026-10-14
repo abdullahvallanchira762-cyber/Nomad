@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllOrders } from "../../redux/slice/orderSlice";
+import { fetchAllOrders, cancelOrder } from "../../redux/slice/orderSlice";
 
 import "./AdminOrders.css";
 
@@ -31,6 +31,41 @@ const AdminOrders = () => {
   useEffect(() => {
     dispatch(fetchAllOrders());
   }, [dispatch]);
+
+
+  // the cancellation handler
+
+  
+const [cancelling, setCancelling] = useState(false);
+
+const handleCancelOrder = async () => {
+  if (!selectedOrder || cancelling) return;
+
+  if (selectedOrder.status === "Cancelled") return;
+
+  const confirmed = window.confirm(
+    `Are you sure you want to cancel order #${selectedOrder.id}?`
+  );
+
+  if (!confirmed) return;
+
+  try {
+    setCancelling(true);
+
+    const updatedOrder = await dispatch(
+      cancelOrder(selectedOrder.id)
+    ).unwrap();
+
+    setSelectedOrder(updatedOrder);
+  } catch (error) {
+    window.alert(
+      "Failed to cancel the order. Please try again."
+    );
+  } finally {
+    setCancelling(false);
+  }
+};
+
 
   // =========================================================
   // FILTER ORDERS
@@ -757,6 +792,28 @@ const AdminOrders = () => {
               </div>
 
             </div>
+
+
+<div className="admin-order-actions">
+  {selectedOrder.status !== "Cancelled" && (
+    <button
+      type="button"
+      className="admin-cancel-order-button"
+      onClick={handleCancelOrder}
+      disabled={cancelling}
+    >
+      {cancelling ? "Cancelling..." : "Cancel Order"}
+    </button>
+  )}
+
+  {selectedOrder.status === "Cancelled" && (
+    <span className="admin-cancelled-message">
+      This order has been cancelled.
+    </span>
+  )}
+</div>
+
+
 
           </div>
 

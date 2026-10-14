@@ -1,75 +1,157 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Footer.css";
 
+const shopCategories = [
+  { label: "HELMETS", category: "Helmets" },
+  { label: "RIDING GEAR", category: "Riding Gear" },
+  { label: "LUGGAGE", category: "Camping" },
+  { label: "CAMPING", category: "Camping" },
+];
+
 const Footer = () => {
+
+const location = useLocation();
+const navigate = useNavigate();
+
+useEffect(() => {
+  if (location.pathname === "/" && location.hash === "#basecamp-dispatch") {
+    const frame = requestAnimationFrame(() => {
+      document
+        .getElementById("basecamp-dispatch")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }
+}, [location.pathname, location.hash]);
+
+const handleTrekkingClick = (event) => {
+  event.preventDefault();
+
+  if (location.pathname === "/") {
+    document
+      .getElementById("basecamp-dispatch")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    if (location.hash !== "#basecamp-dispatch") {
+      navigate("/#basecamp-dispatch", { replace: true });
+    }
+  } else {
+    navigate("/#basecamp-dispatch");
+  }
+};
+
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* Brand Column */}
         <div className="footer-brand">
-          <img src="/images/logo/logo.png" alt="Nomad Logo" className="footer-logo" />
+          <Link to="/" aria-label="Nomad home">
+            <img
+              src="/images/logo/logo.png"
+              alt="Nomad Outdoor Expedition"
+              className="footer-logo"
+            />
+          </Link>
+
           <p className="footer-tagline">
-            Gear for riders, travellers and explorers. Built for the road beyond.
+            Gear for riders, travellers and explorers.
+            Built for the road beyond.
           </p>
+
           <div className="footer-telemetry">
-            <span className="telemetry-label">COORDINATES // TELEMETRY</span>
-            <span className="telemetry-value">ALPINE BASECAMP 4,200M</span>
+            <span className="telemetry-label">
+              COORDINATES // TELEMETRY
+            </span>
+            <span className="telemetry-value">
+              ALPINE BASECAMP 4,200M
+            </span>
           </div>
         </div>
 
-        {/* Links Columns */}
-        <div className="footer-links-grid">
+        <nav className="footer-links-grid" aria-label="Footer navigation">
           <div className="footer-column">
             <h4>EXPLORE</h4>
             <ul>
-              <li><a href="#home">HOME</a></li>
-              <li><a href="#products">PRODUCTS</a></li>
-              <li><a href="#story">OUR STORY</a></li>
-              <li><a href="#expeditions">EXPEDITIONS</a></li>
+              <li><Link to="/">HOME</Link></li>
+              <li><Link to="/products">PRODUCTS</Link></li>
+              <li><Link to="/story">OUR STORY</Link></li>
+              <li><Link to="/expeditions">EXPEDITIONS</Link></li>
             </ul>
           </div>
 
           <div className="footer-column">
             <h4>SHOP</h4>
             <ul>
-              <li><a href="#helmets">HELMETS</a></li>
-              <li><a href="#riding-gear">RIDING GEAR</a></li>
-              <li><a href="#luggage">LUGGAGE</a></li>
-              <li><a href="#camping">CAMPING</a></li>
-              <li><a href="#trekking">TREKKING</a></li>
+              {shopCategories.map(({ label, category }) => (
+                <li key={category}>
+                  <Link
+                    to={`/products?category=${encodeURIComponent(category)}`}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+  <Link
+    to="/#basecamp-dispatch"
+    onClick={handleTrekkingClick}
+  >
+    TREKKING
+  </Link>
+</li>
             </ul>
           </div>
 
           <div className="footer-column">
             <h4>SUPPORT</h4>
             <ul>
-              <li><a href="#shipping">SHIPPING</a></li>
-              <li><a href="#returns">RETURNS</a></li>
-              <li><a href="#warranty">WARRANTY</a></li>
-              <li><a href="#faq">FAQ</a></li>
-              <li><a href="#contact">CONTACT US</a></li>
+              <li><Link to="/shipping">SHIPPING</Link></li>
+              <li><Link to="/returns">RETURNS</Link></li>
+              <li><Link to="/warranty">WARRANTY</Link></li>
+              <li><Link to="/faq">FAQ</Link></li>
+              <li><Link to="/contact">CONTACT US</Link></li>
             </ul>
           </div>
 
           <div className="footer-column">
             <h4>CONNECT</h4>
             <ul>
-              <li><a href="#instagram">INSTAGRAM</a></li>
-              <li><a href="#youtube">YOUTUBE</a></li>
-              <li><a href="#newsletter">DISPATCH NEWSLETTER</a></li>
+              <li>
+                <a
+                  href="https://www.instagram.com/kultxi/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  INSTAGRAM
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  YOUTUBE
+                </a>
+              </li>
+              <li>
+                <Link to="/#newsletter">DISPATCH NEWSLETTER</Link>
+              </li>
             </ul>
           </div>
-        </div>
+        </nav>
       </div>
 
-      {/* Bottom Legal Bar */}
       <div className="footer-bottom">
         <p className="copyright">
-          © 2026 NOMAD OUTDOOR EXPEDITION. ALL RIGHTS RESERVED.
+          © {new Date().getFullYear()} NOMAD OUTDOOR EXPEDITION.
+          ALL RIGHTS RESERVED.
         </p>
+
         <div className="legal-links">
-          <a href="#privacy">PRIVACY POLICY</a>
-          <a href="#terms">TERMS OF DISPATCH</a>
+          <Link to="/privacy-policy">PRIVACY POLICY</Link>
+          <Link to="/terms">TERMS OF DISPATCH</Link>
         </div>
       </div>
     </footer>

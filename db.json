@@ -4,8 +4,8 @@
       "id": "1",
       "name": "Nomad Traverse Helmet",
       "category": "Helmets",
-      "price": 4499,
-      "duration": "7 Days",
+      "price": 4999,
+      "duration": "500",
       "difficulty": "Challenging",
       "stock": 10,
       "featured": true,
@@ -42,10 +42,13 @@
       "duration": "12 Days",
       "difficulty": "Moderate",
       "stock": 12,
-      "featured": true,
+      "featured": false,
       "rating": 4.7,
       "image": "/images/products/tent.png",
-      "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps."
+      "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps.",
+      "images": [
+        "/images/products/tent.png"
+      ]
     },
     {
       "id": "4",
@@ -106,10 +109,13 @@
       "duration": "15 Days",
       "difficulty": "Extreme",
       "stock": 4,
-      "featured": true,
+      "featured": false,
       "rating": 4.9,
       "image": "/images/products/helmet-two.png",
-      "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings."
+      "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings.",
+      "images": [
+        "/images/products/helmet-two.png"
+      ]
     },
     {
       "id": "8",
@@ -119,10 +125,13 @@
       "duration": "12 Days",
       "difficulty": "Moderate",
       "stock": 12,
-      "featured": true,
+      "featured": false,
       "rating": 4.7,
       "image": "/images/products/travel-backpack.png",
-      "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps."
+      "description": "Geodesic storm-proof alpine shelter tested across high-altitude basecamps.",
+      "images": [
+        "/images/products/travel-backpack.png"
+      ]
     },
     {
       "id": "9",
@@ -132,10 +141,13 @@
       "duration": "14 Days",
       "difficulty": "Extreme",
       "stock": 8,
-      "featured": true,
+      "featured": false,
       "rating": 4.9,
       "image": "/images/products/hydration-pack.png",
-      "description": "These backpacks hold a water reservoir and feature a drinking tube with a bite valve that can be clipped to your shoulder strap for easy access."
+      "description": "These backpacks hold a water reservoir and feature a drinking tube with a bite valve that can be clipped to your shoulder strap for easy access.",
+      "images": [
+        "/images/products/hydration-pack.png"
+      ]
     },
     {
       "id": "10",
@@ -145,10 +157,13 @@
       "duration": "15 Days",
       "difficulty": "Extreme",
       "stock": 4,
-      "featured": true,
+      "featured": false,
       "rating": 4.9,
       "image": "/images/products/helmet-three.png",
-      "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings."
+      "description": "Vibram sole, steel shank, and waterproof breathable lining for technical river crossings.",
+      "images": [
+        "/images/products/helmet-three.png"
+      ]
     },
     {
       "name": "BLACK DIAMOND Trail Pro Shock Trekking Poles",
@@ -201,6 +216,14 @@
       "role": "user",
       "status": "active",
       "id": "KiQ8nraQObI"
+    },
+    {
+      "name": "Ahammed",
+      "email": "ahammed123@gmail.com",
+      "password": "ahammed123",
+      "role": "user",
+      "status": "active",
+      "id": "cuv9XA9Njq4"
     }
   ],
   "orders": [
@@ -255,6 +278,62 @@
       "status": "Placed",
       "createdAt": "2026-09-30T07:13:53.896Z",
       "id": "f4ZBnp3HKlg"
+    },
+    {
+      "userId": "cuv9XA9Njq4",
+      "customer": {
+        "name": "Ahammed",
+        "email": "ahammed123@gmail.com",
+        "phone": "8157892737"
+      },
+      "shippingAddress": {
+        "address": "No.14, Ashton Park",
+        "city": "Bengaluru",
+        "state": "Karnataka",
+        "pincode": "560066"
+      },
+      "items": [
+        {
+          "id": "1",
+          "name": "Nomad Traverse Helmet",
+          "category": "Helmets",
+          "price": 4499,
+          "duration": "7 Days",
+          "difficulty": "Challenging",
+          "stock": 10,
+          "featured": true,
+          "rating": 4.9,
+          "image": "/images/products/helmet.png",
+          "description": "Modular dual-visor adventure helmet engineered for arctic transitions and sub-zero passes.",
+          "images": [
+            "/images/products/helmet.png",
+            "/images/products/helmet-back.png"
+          ],
+          "quantity": 1
+        },
+        {
+          "id": "2",
+          "name": "Nomad All-Weather Jacket",
+          "category": "Riding Gear",
+          "price": 6199,
+          "duration": "10 Days",
+          "difficulty": "Expert",
+          "stock": 5,
+          "featured": true,
+          "rating": 4.8,
+          "image": "/images/products/jackets.png",
+          "description": "Mil-spec ballistic nylon jacket with integrated CE Level 2 armor and windproof membrane.",
+          "images": [
+            "/images/products/jackets.png",
+            "/images/products/jacket-back.png"
+          ],
+          "quantity": 1
+        }
+      ],
+      "total": 10698,
+      "status": "Cancelled",
+      "createdAt": "2026-10-06T11:38:14.947Z",
+      "id": "LW6M2cH94Xw"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

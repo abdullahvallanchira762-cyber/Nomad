@@ -1,10 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const storedUser = localStorage.getItem("user");
+const getStoredUser = () => {
+  try {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  } catch {
+    localStorage.removeItem("user");
+    return null;
+  }
+};
 
 const initialState = {
-  user: storedUser ? JSON.parse(storedUser) : null,
-  isAuthenticated: !!storedUser,
+  user: getStoredUser(),
+  isAuthenticated: Boolean(getStoredUser()),
 };
 
 const authSlice = createSlice({
@@ -14,10 +22,17 @@ const authSlice = createSlice({
 
   reducers: {
     loginSuccess: (state, action) => {
-      state.user = action.payload;
+      const user = action.payload;
+
+      // A normal user login must clear any previous admin session.
+      if (user?.role !== "admin") {
+        localStorage.removeItem("admin");
+      }
+
+      state.user = user;
       state.isAuthenticated = true;
 
-      localStorage.setItem("user", JSON.stringify(action.payload));
+      localStorage.setItem("user", JSON.stringify(user));
     },
 
     logout: (state) => {
